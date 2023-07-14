@@ -1,28 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-    const [movies, setMovies] = useState([
-        {
-            id: 1,
-            title: "Evil Dead II",
-            image: "https://images.app.goo.gl/13CJrpyy3RPsK41K7",
-            director: "Sam Raimi"
-        },
-        {
-            id: 2,
-            title: "It",
-            image: "https://images.app.goo.gl/UshXHRQRU3hSCQmh6",
-            director: "Andrés Muschietti"
-        },
-        {
-            id: 3,
-            title: "The Thing",
-            image: "https://images.app.goo.gl/kN3cHdyjuLNoi7CS9",
-            director: "John Carpenter"
-        }
-    ]);
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        fetch("https://hora-flix-f4f11200119c.herokuapp.com/")
+          .then((response) => response.json())
+          .then((data) => {
+            const moviesFromApi = data.docs.map((doc) => {
+                return {
+                    _id: doc.key,
+                    title: doc.title,
+                    image: doc.image,
+                    director: doc.director_name?.[0]
+                };
+            });
+
+            setMovies(moviesFromApi);
+          });
+    }, []);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
 
