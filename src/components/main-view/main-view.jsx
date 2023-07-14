@@ -25,8 +25,14 @@ export const MainView = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     if (selectedMovie) {
+        let similarMovies = movies.filter(/* Complete the logic of filtering */) ;
         return (
-            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+           <> 
+            <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null); }} />
+            <hr />
+            <h2>Similar Movies</h2>
+            {similarMovies.map(/* Complete the logic to render a MovieCard for each movie object in the array */ )}
+           </> 
         );
     }
 
