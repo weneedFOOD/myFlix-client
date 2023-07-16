@@ -9,12 +9,13 @@ export const MainView = () => {
         fetch("https://hora-flix-f4f11200119c.herokuapp.com/")
           .then((response) => response.json())
           .then((data) => {
-            const moviesFromApi = data.docs.map((doc) => {
+            const moviesFromApi = data.map((movie) => {
                 return {
-                    _id: doc.key,
-                    title: doc.title,
-                    image: doc.image,
-                    director: doc.director_name?.[0]
+                    _id: movie.key,
+                    title: movie.title,
+                    image: movie.image,
+                    director: movie.director_name?.[0],
+                    genre: movie.genre.map((genre) => genre.name)
                 };
             });
 
