@@ -6,16 +6,25 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch("https://hora-flix-f4f11200119c.herokuapp.com/")
+        fetch("https://hora-flix-f4f11200119c.herokuapp.com/movies")
           .then((response) => response.json())
           .then((data) => {
+            console.log("movies from api:", data);
             const moviesFromApi = data.map((movie) => {
                 return {
-                    _id: movie.key,
-                    title: movie.title,
-                    image: movie.image,
-                    director: movie.director_name?.[0],
-                    genre: movie.genre.map((genre) => genre.name)
+                    _id: movie._id,
+                    Title: movie.Title,
+                    ImagePath: movie.ImagePath,
+                    Director: {
+                        Name: movie.Director.Name,
+                        Bio: movie.Director.Bio,
+                        Birth: movie.Director.Birth,
+                        Death: movie.Director.Death
+                    },
+                    Description: movie.Description,
+                    ReleaseYear: movie.ReleaseYear,
+                    Genre: movie.Genre.map((genre) => genre.Name),
+                    Featured: movie.Featured
                 };
             });
 
@@ -45,7 +54,7 @@ export const MainView = () => {
         <div>
             {movies.map((movie) => (
                 <MovieCard
-                  key={movie.id}
+                  key={movie._id}
                   movie={movie}
                   onMovieClick={(newSelectedMovie) => {
                     setSelectedMovie(newSelectedMovie);
