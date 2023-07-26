@@ -23,8 +23,7 @@ export const MainView = () => {
                     },
                     Description: movie.Description,
                     ReleaseYear: movie.ReleaseYear,
-                    Genre: movie.Genre.map((genre) => genre.Name),
-                    Featured: movie.Featured
+                    Genre: movie.Genre.Name
                 };
             });
 
