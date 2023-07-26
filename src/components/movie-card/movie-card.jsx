@@ -27,8 +27,7 @@ MovieCard.propTypes = {
     }),
     Description: PropTypes.string,
     ReleaseYear: PropTypes.string,
-    Genre: PropTypes.arrayOf(PropTypes.string).isRequired,
-    Featured: PropTypes.string
-  }).isRequired,
+    Genre: PropTypes.string
+  }),
   onMovieClick: PropTypes.func.isRequired
 };
