@@ -1,5 +1,6 @@
 // Here you import the PropTypes library
 import PropTypes from "prop-types";
+import React from "react";
 
 // The MovieCard function component
 export const MovieCard = ({ movie, onMovieClick}) => {
@@ -9,7 +10,7 @@ export const MovieCard = ({ movie, onMovieClick}) => {
             onMovieClick(movie);
         }}
       >
-        {movie.title}
+        {movie.Title}
       </div>  
     );
 };
