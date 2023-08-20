@@ -2981,7 +2981,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./components/main-view/main-view.jsx":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"jn5Cc"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./components/main-view/main-view.jsx":"4gflv","react-bootstrap/Container":"jn5Cc","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -27202,20 +27202,20 @@ const MainView = ()=>{
             }
         }).then((response)=>response.json()).then((data)=>{
             setMovies(movies);
-            const moviesFromApi = data.map((movie1)=>{
+            const moviesFromApi = data.map((movie)=>{
                 return {
-                    _id: movie1._id,
-                    Title: movie1.Title,
-                    ImagePath: movie1.ImagePath,
+                    _id: movie._id,
+                    Title: movie.Title,
+                    ImagePath: movie.ImagePath,
                     Director: {
-                        Name: movie1.Director.Name,
-                        Bio: movie1.Director.Bio,
-                        Birth: movie1.Director.Birth,
-                        Death: movie1.Director.Death
+                        Name: movie.Director.Name,
+                        Bio: movie.Director.Bio,
+                        Birth: movie.Director.Birth,
+                        Death: movie.Director.Death
                     },
-                    Description: movie1.Description,
-                    ReleaseYear: movie1.ReleaseYear,
-                    Genre: movie1.Genre.Name
+                    Description: movie.Description,
+                    ReleaseYear: movie.ReleaseYear,
+                    Genre: movie.Genre.Name
                 };
             });
             setMovies(moviesFromApi);
@@ -27229,7 +27229,7 @@ const MainView = ()=>{
             md: 5,
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginViewJsx.LoginView), {
-                    onLoggedIn: (user, token)=>{
+                    onLoginSubmit: (user, token)=>{
                         setUser(user);
                         setToken(token);
                     }
@@ -27269,18 +27269,18 @@ const MainView = ()=>{
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 60,
             columnNumber: 10
-        }, undefined) : movie.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        }, undefined) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             children: "The list is empty!"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 69,
             columnNumber: 11
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-            children: movie.map((movie1)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+            children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                     className: "mb-5",
                     md: 3,
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCardJsx.MovieCard), {
-                        movie: movie1,
+                        movie: movie,
                         onMovieClick: (newSelectedMovie)=>{
                             setSelectedMovie(newSelectedMovie);
                         }
@@ -27289,7 +27289,7 @@ const MainView = ()=>{
                         lineNumber: 74,
                         columnNumber: 15
                     }, undefined)
-                }, movie1.id, false, {
+                }, movie.id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 73,
                     columnNumber: 14
