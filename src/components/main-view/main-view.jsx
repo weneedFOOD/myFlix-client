@@ -10,7 +10,7 @@ export const MainView = () => {
     const storedToken = localStorage.getItem("token");
     const [user, setUser] =useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken : null);
-    const [movies, setMovies] = useState([0]);
+    const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     
     useEffect(() => {
@@ -21,7 +21,6 @@ export const MainView = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            setMovies(movies);
 
             const moviesFromApi = data.map((movie) => {
                 return {
@@ -70,7 +69,7 @@ export const MainView = () => {
         ) : (
           <>
             {movies.map((movie) => (
-             <Col className="mb-5" key={movie.id} md={3}>
+             <Col className="mb-5" key={movie._id} md={3}>
               <MovieCard
                 movie={movie}
                 onMovieClick={(newSelectedMovie) => {
