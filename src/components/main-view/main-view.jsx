@@ -5,6 +5,7 @@ import { LoginView } from "../login-view/login-view.jsx";
 import { SignupView } from "../signup-view/signup-view.jsx";
 import { Row, Col } from "react-bootstrap";
 
+
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
@@ -14,10 +15,12 @@ export const MainView = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     
     useEffect(() => {
-        if (!token) return;
+        if (!token) {
+          return;
+        }
 
-        fetch("https://hora-flix-f4f11200119c.herokuapp.com/movies", {
-            headers: { Authorization: `Bearer ${token}` }
+        fetch('https://hora-flix-f4f11200119c.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}`}
         })
           .then((response) => response.json())
           .then((data) => {
@@ -38,8 +41,11 @@ export const MainView = () => {
                     Genre: movie.Genre.Name
                 };
             });
-
+            
             setMovies(moviesFromApi);
+          })
+          .catch((error) => {
+            console.error(error);
           });
     }, [token]);
 
@@ -52,7 +58,10 @@ export const MainView = () => {
             setToken(token);
            }} />
            or
-           <SignupView />
+           <SignupView onSignupSubmit={(user, token) => {
+            setUser(user);
+            setToken(token);
+           }}/>
           </Col>
 
         ) : selectedMovie ? (
@@ -81,5 +90,5 @@ export const MainView = () => {
           </>
         )}
       </Row>
-    );
-  };
+   )
+};
