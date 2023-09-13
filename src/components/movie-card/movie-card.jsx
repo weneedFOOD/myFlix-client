@@ -2,16 +2,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
+import { Link, Button } from "react-router-dom";
 
 import "./movie-card.css";
 
 // The MovieCard function component
 export const MovieCard = ({ movie, onMovieClick}) => {
     return (
-        <Card className="h-100" onClick={() => onMovieClick(movie)} variant="link">
+        <Card>
             <Card.Img variant="top" src={movie.ImagePath} />
             <Card.Body>
                <Card.Title>{movie.Title}</Card.Title>
+               <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+                <Button variant="link">Open</Button>
+               </Link>
              </Card.Body>
          </Card>  
     );
@@ -31,6 +35,5 @@ MovieCard.propTypes = {
     Description: PropTypes.string,
     ReleaseYear: PropTypes.string,
     Genre: PropTypes.string
-  }),
-  onMovieClick: PropTypes.func.isRequired
+  }).isRequired
 };
