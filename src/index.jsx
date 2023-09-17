@@ -8,7 +8,8 @@ const App = () => {
   return (
     <Container fluid>
       <MainView />
-    </Container>);
+    </Container>
+    );
 };
 
 // Finds the root of your app
