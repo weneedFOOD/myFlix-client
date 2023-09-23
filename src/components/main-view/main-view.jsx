@@ -96,7 +96,7 @@ export const MainView = () => {
             }
           />
           <Route
-            path="/movies/:movie_id"
+            path="/movies/:movieId"
             element={
               <>
                 {!user ? (
@@ -123,9 +123,9 @@ export const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie) => (
-                      <Col className="mb-4" key={movies._id} md={3}>
+                      <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard 
-                           movies={movies}
+                           movie={movie}
                            user={user}
                            token={token}
                            setUser={setUser}
