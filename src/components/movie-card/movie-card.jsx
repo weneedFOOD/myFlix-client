@@ -10,12 +10,12 @@ import "./movie-card.css";
 export const MovieCard = ({ movie, user, token, setUser }) => {
 
   const [isFavorite, setIsFavorite] = useState (
-    user.addFavoriteMovie.includes(movie._id)
-  )
+    movie && user && user.FavoriteMovie && user.FavoriteMovie.includes(movie._id)
+  );
     
   const addFavoriteMovie = () => {
     fetch(
-      `https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      "https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}/movies/${movie._id}",
       {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
@@ -25,7 +25,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
         if (response.ok) {
           return response.json();
         } else {
-          alert('Failed');
+          alert("Failed");
           return false;
         }
       })
@@ -44,7 +44,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
 
   const removeFavoriteMovie = () => {
     fetch(
-      `https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      "https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}/movies/${movie._id}",
       {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
@@ -74,7 +74,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
     return (
       <>
         <Card className="h-100">
-            <Card.Img variant="top" src={movie.ImagePath} />
+            <Card.Img variant="top" src={movie && movie.ImagePath} />
             <Card.Body>
               {isFavorite ? (
                 <Button variant="Danger" onClick={removeFavoriteMovie}>
@@ -88,7 +88,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
             </Card.Body>
 
             <Card.Body>
-               <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+               <Link to={movie && `/movies/${(movie._id)}`}>
                 <Button className="info-button" variant="outline-light">Info</Button>
                </Link>
              </Card.Body>
@@ -100,16 +100,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
 // Here is where we define all the props constraints for the MovieCard
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-    }),
-    Description: PropTypes.string,
-    ReleaseYear: PropTypes.string,
-    Genre: PropTypes.string
+    ImagePath: PropTypes.string.isRequired
   }).isRequired
 };
