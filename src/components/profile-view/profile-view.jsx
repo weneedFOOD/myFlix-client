@@ -3,7 +3,7 @@ import { MovieCard } from "../movie-card/movie-card.jsx";
 import { Button, Col, Form, Row, Modal } from "react-bootstrap";
 
 
-export const ProfileView = ({ user, token, setUser, movies }) => {
+export const ProfileView = ({ token, user, setUser, movies }) => {
 	const [username, setUsername] = useState(user.Username);
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState(user.Email);
@@ -11,10 +11,8 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const favoriteMovies = movies.filter((movie) => {
-		return user.FavoriteMovies.includes(movie._id)
+		return user?.FavoriteMovies?.includes(movie._id)
 	});
-
-	let result = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
 
 	const handleShowModal = () => setShowModal(true);
 	const handleCloseModal = () => setShowModal(false);
@@ -31,7 +29,7 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 			data["Password"] = password
 		}
 
-		fetch(`https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}`, {
+		fetch("https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}", {
 			method: "PUT",
 			body: JSON.stringify(data),
 			headers: {
@@ -53,7 +51,7 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 	};
 
 	const handleDeleteUser = () => {
-		fetch(`https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}`, {
+		fetch("https://hora-flix-f4f11200119c.herokuapp.com/users/${user.Username}", {
 			method: "DELETE",
 			headers: {
 				Authorization: `Bearer ${token}`
@@ -109,7 +107,7 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 							<Form.Label>Birthday:</Form.Label>
 							<Form.Control
 								type="date"
-								value={birthday.slice(0, 10)}
+								value={birthday}
 								onChange={(e) => setBirthday(e.target.value)}
 								required
 							/>
@@ -139,7 +137,7 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 				</Col>
 			</Row>
 			<Row>	
-				{result.map((movie) => (
+				{movies.map((movie) => (
 					<Col className="mb-5" key={movie._id} md={4}>
 						<MovieCard 
 							movie={movie} 
