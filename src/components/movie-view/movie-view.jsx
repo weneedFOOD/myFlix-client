@@ -1,48 +1,43 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { Row, Col, Button } from "react-bootstrap";
 import "./movie-view.css";
 
 export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
 
-    const movie = movies.find((m) => m.id === movieId);
+    const movie = movies.find((m) => m._id === movieId);
     
     return (
-        <div>
-            <div>
-                <img className="w-100" src={movie.image}/>
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{movie.Title}</span>
-            </div>
-            <div>
-                <span>Description: </span>
-                <span>{movie.Description}</span>
-            </div>
-            <div>
-                <span>ReleaseYear: </span>
-                <span>{movie.ReleaseYear}</span>
-            </div>
-            <div>
-                <span>Genre: </span>
-                <span>{movie.Genre}</span>
-            </div>
-            <div>
-                <span>Director: </span>
-                <span>{movie.Name}</span>
-            </div>
-            <div>
-                <span>Bio: </span>
-                <span>{movie.Bio}</span>
-            </div>
-            <div>
-                <span>Birth: </span>
-                <span>{movie.Birth}</span>
-            </div>
-            <Link to={`/`}>
-                <button className="back-button">Back</button>
-            </Link>
-        </div>    
+        <>
+          <Row className="h-100  movie-view gy-5">
+
+            <Col md={6} sm={12} className="text-center gy-5 px-4">
+                <img src={movie?.ImagePath} className="poster-image" />
+            </Col>
+
+            <Col md={6} sm={12} className="movie-info px-4">
+                <div>
+                    <h1>{movie?.Title}</h1>
+                </div>
+                <div className="description-section">
+                    <p>{movie?.Description}</p>
+                </div>
+                <div className='details-section'>
+                    <span className='fw-bold'>Genre: </span>
+                    <span>{movie?.Genre}</span>
+                </div>
+                <div>
+                    <span className='fw-bold'>Release year: </span>
+                    <span>{movie?.ReleaseYear}</span>
+                </div>
+                <div>
+                    <Link to={`/`}>
+                        <Button variant='danger' className="back-button">Back</Button>
+                    </Link>
+                </div>
+            </Col>
+          </Row>
+       </>
     );
-};
+};  

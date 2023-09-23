@@ -1,10 +1,7 @@
-$color: steelblue;
 $primary: firebrick;
+$secondary: black;
 $body-bg: darkgrey;
+$font-family-base: Impact, fantasy;
+
 
 @import '~bootstrap/scss/bootstrap.scss';
-
-
-.my-flix {
-  color: $color;
-}
