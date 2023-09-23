@@ -1,10 +1,21 @@
-.movieCard {
-    margin: 20px;
-    padding: 20px;
-    text-align: left;
-    border-bottom: 1px solid rgb(61, 114, 226);
+.custom-card {
+	border-radius: 8px;
+	border-style: none;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.movieCard:hover {
-    background-color: rgb(95, 137, 230);
+.info-button {
+	padding-top: 40px;
+}
+
+.card-image {
+	padding: 12px;
+}
+
+.favorite {
+	padding-top: 32px;
+}
+
+.more-info {
+	padding-bottom: 32px;
 }
