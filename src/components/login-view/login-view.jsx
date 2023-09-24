@@ -21,21 +21,28 @@ export const LoginView = ({onLoginSubmit}) => {
         },
         body: JSON.stringify(data)
       })
-        .then((response) => response.json())
+        .then((response) => {
+            console.log("Response received:",response);
+            return response.json();
+        })
         .then((data) => {
-            console.log("Login response: ", data);
+            console.log("Login response:", data);
             if (data.user) {
                 localStorage.setItem("user", JSON.stringify(data.user));
                 localStorage.setItem("token", data.token);
                 onLoginSubmit(data.user, data.token);
             } else {
+                console.log("No user found in response:",data);
                 alert("No such user");
             }
         })
         .catch((e) => {
             alert("Something went wrong");
         });
-    };
+    };  
+
+    console.log("Fetching login data...");
+
 
     return (
       <Form onSubmit={handleSubmit}>
