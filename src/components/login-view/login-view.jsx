@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-export const LoginView = ({onLoginSubmit}) => {
+export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -30,15 +30,16 @@ export const LoginView = ({onLoginSubmit}) => {
             if (data.user) {
                 localStorage.setItem("user", JSON.stringify(data.user));
                 localStorage.setItem("token", data.token);
-                onLoginSubmit(data.user, data.token);
+                onLoggedIn(data.user, data.token);
             } else {
                 console.log("No user found in response:",data);
                 alert("No such user");
             }
         })
-        .catch((e) => {
+        .catch((error) => {
+            console.error(error);
             alert("Something went wrong");
-        });
+      });
     };  
 
     console.log("Fetching login data...");
