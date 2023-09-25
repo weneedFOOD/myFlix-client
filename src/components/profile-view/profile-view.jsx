@@ -2,7 +2,6 @@ import { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card.jsx";
 import { Button, Col, Form, Row, Modal } from "react-bootstrap";
 
-
 export const ProfileView = ({ token, user, setUser, movies }) => {
 	const [username, setUsername] = useState(user.Username);
 	const [password, setPassword] = useState("");
@@ -13,6 +12,7 @@ export const ProfileView = ({ token, user, setUser, movies }) => {
 	const favoriteMovies = movies.filter((movie) => {
 		return user?.FavoriteMovies?.includes(movie._id)
 	});
+
 
 	const handleShowModal = () => setShowModal(true);
 	const handleCloseModal = () => setShowModal(false);
@@ -137,12 +137,12 @@ export const ProfileView = ({ token, user, setUser, movies }) => {
 				</Col>
 			</Row>
 			<Row>	
-				{movies.map((movie) => (
+				{favoriteMovies.map((movie) => (
 					<Col className="mb-5" key={movie._id} md={4}>
 						<MovieCard 
 							movie={movie} 
 							user={user}
-              token={token}
+                            token={token}
 							setUser={setUser}
 						>
 						</MovieCard>
